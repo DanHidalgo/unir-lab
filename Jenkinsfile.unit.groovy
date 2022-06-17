@@ -31,6 +31,7 @@ pipeline {
     post {
         always {
             junit 'results/*_result.xml'
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/cypress', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
         }
         failure {  
              mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "daniel.hidalgov@epn.edu.ec";
